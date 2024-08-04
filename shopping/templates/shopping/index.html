@@ -1,0 +1,129 @@
+{% extends "shopping/layout.html" %}
+{% load static %}
+{% block body %}
+
+    <div class="title">
+        <h3>"SMART SHOPPING: PREDICTIVE PURCHASES “ 
+            <br> WITH MACHINE LEARNING
+        </h3>
+    </div>
+
+    <div class="load">
+        <h1>Load Data</h1>
+        <form method="post" action="{% url 'load_data' %}">  
+            {% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="Load Data">
+        </form>
+    </div>
+    {{ dataset_head|safe }}
+
+    <div class="train">
+    <h3>k-nearest-neighbor classification</h3>
+    <form method="post" action="{% url 'train_model' %}">  
+        {% csrf_token %}
+        <input type="submit" value="Train Model">
+    </form>
+    
+    {% if accuracy %}
+        <h5>Accuracy: {{ accuracy }}%</h5> 
+    {% endif %}
+    {% if recall %}
+        <h5>Recall: {{recall}}%</h5>
+    {% endif %}
+    {% if precision %}
+        <h5>Precision: {{precision}}%</h5>
+    {% endif %}
+    
+    </div>
+    <hr>
+    <div class="predict">
+    <form method="POST" action="{% url 'predict_model' %}">
+        {% csrf_token %}
+        <div class="row mb-3">
+        <label for="Administrative" class="col-sm-2 col-form-label">Administrative:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="Administrative" required><br>
+        </div>
+
+        <div class="row mb-3">
+        <label for="Administrative_Duration" class="col-sm-2 col-form-label">Administrative Duration:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="Administrative_Duration" required><br>
+        </div>
+        <div class="row mb-3">
+        <label for="Informational" class="col-sm-2 col-form-label">Informational:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="Informational" required><br>
+        </div>
+        <div class="row mb-3">
+        <label for="Informational_Duration" class="col-sm-2 col-form-label">Informational Duration:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="Informational_Duration" required><br>
+        </div>        
+        <div class="row mb-3">
+        <label for="ProductRelated" class="col-sm-2 col-form-label">ProductRelated</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="ProductRelated" required><br>
+        </div>        
+        <div class="row mb-3">
+        <label for="ProductRelated_Duration" class="col-sm-2 col-form-label">ProductRelated Duration:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="ProductRelated_Duration" required><br>
+        </div>
+        <div class="row mb-3">
+        <label for="BounceRates" class="col-sm-2 col-form-label">BounceRates:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="BounceRates" required><br>
+        </div>
+        <div class="row mb-3">
+        <label for="ExitRates" class="col-sm-2 col-form-label">ExitRates:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="ExitRates" required><br>
+        </div>
+
+        <div class="row mb-3">
+        <label for="PageValues" class="col-sm-2 col-form-label">PageValues:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="PageValues" required><br>
+        </div>
+        <div class="row mb-3">
+        <label for="SpecialDay" class="col-sm-2 col-form-label">SpecialDay:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="SpecialDay" required><br>
+        </div>
+        <div class="row mb-3">
+        <label for="Month" class="col-sm-2 col-form-label">Month:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="Month" required><br>
+        </div>
+        <div class="row mb-3">
+        <label for="OperatingSystems" class="col-sm-2 col-form-label">OperatingSystems:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="OperatingSystems" required><br>
+        </div>
+        <div class="row mb-3">
+        <label for="Browser" class="col-sm-2 col-form-label">Browser:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="Browser" required><br>
+        </div>
+        
+        <div class="row mb-3">
+        <label for="Region" class="col-sm-2 col-form-label">Region:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="Region" required><br>
+        </div>
+        
+        <div class="row mb-3">
+        <label for="TrafficType" class="col-sm-2 col-form-label">TrafficType:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="TrafficType" required><br>
+        </div>
+        <div class="row mb-3">
+        <label for="VisitorType" class="col-sm-2 col-form-label">VisitorType:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="VisitorType" required><br>
+        </div>
+        <div class="row mb-3">
+        <label for="Weekend" class="col-sm-2 col-form-label">Weekend:</label>
+        <input type="text" class="form-control col-sm-2 col-form-label" name="Weekend" required><br>
+        </div>
+        <input type="submit" value="Predict">
+    </form>
+    </div>
+
+    <div class="image">
+    <img src="{% static 'shopping/images/image.png' %}" alt="Description of the image">
+    </div>
+
+    <div class="pvalue">
+    <h5>Prediction: {{ prediction }}</h5>
+    </div>
+
+        <!-- <hr> -->
+
+{% endblock %}
+

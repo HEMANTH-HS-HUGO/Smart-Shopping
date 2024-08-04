@@ -1,0 +1,48 @@
+.title{
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+.load{
+    text-align: center;
+}
+.load input{
+    padding: 5px;
+}
+.train{
+    text-align: center;
+    margin: 20px;
+}
+.train form{
+    margin-bottom: 10px;
+}
+body{
+    background: rgb(80, 148, 194);
+}
+.predict{
+    margin: 50px;
+    float: left;
+    width: 50%;
+}
+
+
+
+.predict form input{
+    background: rgb(80, 148, 194);
+}
+
+.pvalue{
+    text-align: center;
+    margin: 20px;
+}
+
+hr{
+    height: 0.1cm;
+    background: black;
+}
+
+h1{
+    color: rgb(75, 74, 74);
+}
+
